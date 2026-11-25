@@ -16,7 +16,12 @@ h1{font-size:clamp(30px,4vw,52px);margin:9px 0 6px;letter-spacing:-.04em}
 .subtitle{color:var(--muted);max-width:800px;line-height:1.55}
 .wrap{max-width:1450px;margin:auto;padding:0 clamp(18px,4vw,54px) 50px}
 .topbar{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
-.navbtn{position:relative;z-index:30;pointer-events:auto;touch-action:manipulation;background:white;color:#5e567a;padding:11px 15px;border-radius:999px;border:1px solid var(--line);font-weight:650}
+.navbtn{display:inline-block;text-decoration:none;position:relative;z-index:30;pointer-events:auto;touch-action:manipulation;background:white;color:#5e567a;padding:11px 15px;border-radius:999px;border:1px solid var(--line);font-weight:650}
+.view:target{display:block}
+body:has(.view:target) #home.view{display:none}
+#home.view:target{display:block}
+.navbtn[href="#home"]:target,.navbtn[href="#home"]{color:#5e567a}
+body:has(#roles:target) .navbtn[href="#roles"],body:has(#roadmap:target) .navbtn[href="#roadmap"],body:has(#credentials:target) .navbtn[href="#credentials"],body:has(#daily:target) .navbtn[href="#daily"],body:has(#quran:target) .navbtn[href="#quran"],body:has(#skills:target) .navbtn[href="#skills"],body:has(#resources:target) .navbtn[href="#resources"],body:has(#portfolio:target) .navbtn[href="#portfolio"]{background:#7662c6;color:white;border-color:#7662c6}
 .navbtn.active{background:#7662c6;color:white;border-color:#7662c6}
 .view{display:none}.view.active{display:block}
 .hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-bottom:20px}
@@ -78,12 +83,12 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 <h1>AI Career Path OS ✦</h1>
 <p class="subtitle">A job-first roadmap: each learning step is tied to a target role, hiring skills, a gap to close, a proof project, and trusted learning sources. Use the tabs to navigate—no nested workspace maze.</p>
 <div class="topbar" id="nav">
-<button class="navbtn active" data-view="home" onclick="window.activateCareerView('home')">🏠 Home</button>
-<button class="navbtn" data-view="roles" onclick="window.activateCareerView('roles')">💼 Job Path</button>
-<button class="navbtn" data-view="roadmap" onclick="window.activateCareerView('roadmap')">🗓 Roadmap</button><button class="navbtn" data-view="credentials" onclick="window.activateCareerView('credentials')">🎓 Credentials</button><button class="navbtn" data-view="daily" onclick="window.activateCareerView('daily')">📆 Daily Tracker</button><button class="navbtn" data-view="quran" onclick="window.activateCareerView('quran')">🌙 Quran Journey</button>
-<button class="navbtn" data-view="skills" onclick="window.activateCareerView('skills')">🧩 Skills & Gaps</button>
-<button class="navbtn" data-view="resources" onclick="window.activateCareerView('resources')">🔗 Learning Sources</button>
-<button class="navbtn" data-view="portfolio" onclick="window.activateCareerView('portfolio')">🏆 Portfolio</button>
+<a class="navbtn active" data-view="home" href="#home">🏠 Home</a>
+<a class="navbtn" data-view="roles" href="#roles">💼 Job Path</a>
+<a class="navbtn" data-view="roadmap" href="#roadmap">🗓 Roadmap</a><a class="navbtn" data-view="credentials" href="#credentials">🎓 Credentials</a><a class="navbtn" data-view="daily" href="#daily">📆 Daily Tracker</a><a class="navbtn" data-view="quran" href="#quran">🌙 Quran Journey</a>
+<a class="navbtn" data-view="skills" href="#skills">🧩 Skills & Gaps</a>
+<a class="navbtn" data-view="resources" href="#resources">🔗 Learning Sources</a>
+<a class="navbtn" data-view="portfolio" href="#portfolio">🏆 Portfolio</a>
 </div>
 
 </header>
