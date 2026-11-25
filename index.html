@@ -81,17 +81,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 <button class="navbtn" data-view="resources">🔗 Learning Sources</button>
 <button class="navbtn" data-view="portfolio">🏆 Portfolio</button>
 </div>
-<script>
-(function(){
- const nav=document.querySelectorAll('.navbtn'),views=document.querySelectorAll('.view');
- function switchTab(id){
-  views.forEach(v=>v.classList.toggle('active',v.id===id));
-  nav.forEach(b=>b.classList.toggle('active',b.dataset.view===id));
-  window.scrollTo(0,0);
- }
- nav.forEach(b=>{b.addEventListener('click',function(e){e.preventDefault();switchTab(this.dataset.view);});});
-})();
-</script>
+
 </header>
 <div class="wrap">
 <div class="pwa-banner"><div><b>📱 Turn this dashboard into an app</b><br><small>Install it on your phone or desktop; offline shell support is being prepared.</small></div><button id="installApp" hidden>Install App</button></div>
@@ -282,7 +272,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 <script>
 const nav=document.querySelectorAll('.navbtn'),views=document.querySelectorAll('.view');
 function show(id){views.forEach(v=>v.classList.toggle('active',v.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo({top:0,behavior:'smooth'});}
-nav.forEach(b=>b.onclick=()=>show(b.dataset.view));
+nav.forEach(b=>{b.addEventListener('click',e=>{e.preventDefault();show(b.dataset.view);});});
 document.querySelectorAll('.track').forEach(t=>t.onclick=()=>show('skills'));
 const tasks=[
 "Week 1: AI literacy foundation + draft AI Literacy for Educators presentation",
