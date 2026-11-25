@@ -473,4 +473,23 @@ if(document.getElementById('downloadReport'))document.getElementById('downloadRe
 let deferredInstallPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;const btn=document.getElementById('installApp');if(btn)btn.hidden=false;});const installBtn=document.getElementById('installApp');if(installBtn)installBtn.addEventListener('click',async()=>{if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;installBtn.hidden=true;});
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(console.warn);
 </script>
+<script>
+/* Independent navigation fallback: works even if another script throws later. */
+(function(){
+  function activateView(id){
+    var target=document.getElementById(id);
+    if(!target || !target.classList.contains('view')) return;
+    document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active',v===target);});
+    document.querySelectorAll('.navbtn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-view')===id);});
+  }
+  document.addEventListener('click',function(event){
+    var button=event.target.closest('.navbtn[data-view]');
+    if(!button) return;
+    event.preventDefault();
+    event.stopPropagation();
+    activateView(button.getAttribute('data-view'));
+  },true);
+  window.activateCareerView=activateView;
+})();
+</script>
 <script src="quran-tajweed.js"></script>\n</body></html>
