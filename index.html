@@ -429,7 +429,7 @@ function updateWeekProgress(){const checks=[...document.querySelectorAll(".daych
 document.getElementById("prevWeek").onclick=()=>renderWeek(activeWeek-1);document.getElementById("nextWeek").onclick=()=>renderWeek(activeWeek+1);renderWeek(0);
 
 // Dynamic Quran Journey: user-selected memorization, adaptive reviews, flexible reading. Legacy qjourney_* data is preserved.
-const qTodayKey=()=>new Date().toISOString().slice(0,10);
+const qTodayKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const qMemKey='quran_dynamic_mem_v1', qReviewKey='quran_dynamic_review_v1', qReadKey='quran_dynamic_read_v1';
 const qLoad=(k,def)=>{try{return JSON.parse(localStorage.getItem(k))||def}catch{return def}};
 let qMemRecords=qLoad(qMemKey,[]), qReviewLogs=qLoad(qReviewKey,[]), qReadLogs=qLoad(qReadKey,[]);
