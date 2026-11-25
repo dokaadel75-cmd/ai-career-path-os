@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Career Path OS</title>
+<style>
+:root{--bg:#f7f7fb;--ink:#29253b;--muted:#74718a;--white:#fff;--lav:#e9e2ff;--purple:#7963c8;--blue:#e3efff;--green:#e3f4e9;--peach:#fff0df;--pink:#ffe5ee;--teal:#dff3f1;--line:#e8e5ef;--shadow:0 8px 28px #3e2e6810;--radius:20px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif}
+a{color:#6754b7}button{font:inherit;cursor:pointer;border:0}
+header{padding:34px clamp(18px,4vw,54px) 20px;max-width:1450px;margin:auto}
+.kicker{color:#8778c4;letter-spacing:.12em;text-transform:uppercase;font-size:12px;font-weight:700}
+h1{font-size:clamp(30px,4vw,52px);margin:9px 0 6px;letter-spacing:-.04em}
+.subtitle{color:var(--muted);max-width:800px;line-height:1.55}
+.wrap{max-width:1450px;margin:auto;padding:0 clamp(18px,4vw,54px) 50px}
+.topbar{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.navbtn{background:white;color:#5e567a;padding:11px 15px;border-radius:999px;border:1px solid var(--line);font-weight:650}
+.navbtn.active{background:#7662c6;color:white;border-color:#7662c6}
+.view{display:none}.view.active{display:block}
+.hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-bottom:20px}
+.panel{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.panel h2,.panel h3{margin-top:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{padding:16px;border-radius:15px;background:#f7f4ff}
+.stat strong{font-size:25px;display:block}.stat span{color:var(--muted);font-size:13px}
+.track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.track{border-radius:19px;padding:20px;border:1px solid #ffffffaa;min-height:170px;transition:.2s;cursor:pointer}
+.track:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.track .num{font-size:12px;font-weight:800;letter-spacing:.12em;opacity:.65}
+.track h3{margin:10px 0 7px;font-size:20px}.track p{margin:0;color:#68657c;font-size:14px;line-height:1.45}
+.t1{background:var(--blue)}.t2{background:var(--green)}.t3{background:var(--lav)}.t4{background:var(--peach)}.t5{background:var(--pink)}.t6{background:var(--teal)}
+.detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:15px}
+.back{background:#f1edfb;padding:10px 14px;border-radius:12px;color:#6355a4;font-weight:700}
+.tag{display:inline-block;border-radius:999px;padding:5px 10px;background:#f2effa;color:#6657a7;font-size:12px;font-weight:700;margin:3px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+ul{padding-left:20px;line-height:1.6}li{margin:5px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:#6c6490;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.pill{padding:4px 8px;border-radius:8px;font-size:12px;white-space:nowrap}.priority{background:#fff2d8;color:#96671c}.ready{background:#e2f5e8;color:#36714c}.gap{background:#ffebee;color:#a44753}.validate{background:#eee9ff;color:#6655b1}
+.phase-list{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.phase{background:white;border:1px solid var(--line);border-radius:18px;padding:17px}
+.phase h3{margin:5px 0 8px}.phase small{color:var(--muted)}
+.checklist label{display:block;padding:10px;border-bottom:1px solid var(--line);cursor:pointer}
+.checklist input{margin-right:9px;accent-color:#7662c6}
+.resource{padding:12px 0;border-bottom:1px solid var(--line)}.resource:last-child{border:0}
+.resource a{font-weight:700;text-decoration:none}.resource p{margin:5px 0;color:var(--muted);font-size:13px}
+.jobcard{border:1px solid var(--line);border-radius:16px;padding:16px;margin:10px 0;background:white}
+.jobcard h3{margin:4px 0}.jobcard .stage{color:#7662c6;font-size:12px;font-weight:800;text-transform:uppercase}
+.progressbar{height:8px;background:#eeebf5;border-radius:99px;overflow:hidden;margin-top:8px}.progressbar span{display:block;height:100%;background:#9380d8;width:0}
+.footer{color:var(--muted);font-size:12px;padding:24px 4px}
+@media(max-width:900px){.track-grid{grid-template-columns:repeat(2,1fr)}.hero-grid,.cols{grid-template-columns:1fr}.phase-list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.track-grid,.stats,.phase-list{grid-template-columns:1fr}.navbtn{font-size:13px;padding:9px 11px}}
+
+.daily-card{border:1px solid var(--line);border-left:7px solid var(--track);border-radius:18px;background:white;padding:18px;box-shadow:var(--shadow)}
+.daily-card h3{margin:5px 0 10px}.daylabel{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.tracklabel{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--trackbg);font-size:12px;font-weight:750}
+.daily-card .part{margin:10px 0;padding:10px;border-radius:12px;background:#faf9fd}
+.daily-card .part strong{display:block;font-size:12px;color:#6d6590;margin-bottom:4px}
+.daily-card .done{margin-top:10px;padding:9px;border-radius:10px;background:#f5f3fa}
+.weekbtn{padding:8px 10px;border-radius:10px;background:#f4f1fa;color:#62588c;font-weight:700;font-size:12px}
+.weekbtn.active{background:#7662c6;color:white}
+.daily-card a{font-weight:650;text-decoration:none}
+
+.qstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}.qstat,.qpanel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}.qstat b{display:block;font-size:25px;color:#6d5ab8}.qstat span{font-size:13px;color:var(--muted)}.qpanel{margin:12px 0}.qhead{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.qcontrols{display:flex;gap:6px}.qbtn{border:0;border-radius:10px;padding:9px 13px;background:#e9e2ff;color:#62518f;font-weight:700;cursor:pointer}.qday{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.qtask{padding:14px;border-radius:14px;background:#f9f7ff;border-left:5px solid #9a86d7}.qtask.read{background:#fff5e9;border-left-color:#d9a56a}.qtask.review{background:#eaf7ee;border-left-color:#76ad88}.qtask h4{margin:0 0 8px}.qtask p{margin:5px 0}.qtask a{display:inline-block;margin:5px 5px 0 0;color:#62518f;font-weight:700}.qtask label{display:block;margin-top:10px;padding:7px;background:#fff;border-radius:8px}.qdays{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0}.qdaybtn{padding:6px 9px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer}.qdaybtn.active{background:#7662c6;color:#fff}.qdaybtn.done{border-color:#6ca783;background:#e7f5eb}.qprogress{height:10px;background:#eee;border-radius:20px;overflow:hidden;margin-top:10px}.qprogress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#9b8bd8,#82bca0)}#qNotes{width:100%;min-height:100px;border:1px solid #ddd;border-radius:12px;padding:10px;font:inherit}.qcert{border:2px solid #c6b7eb;background:linear-gradient(135deg,#fff,#f4efff);border-radius:18px;padding:18px;text-align:center}.qcert h3{font-family:serif;color:#7662c6;font-size:23px}.qcert .owner{font-size:21px;font-weight:800;color:#504276}.qcert button{margin-top:10px}.qcert.locked{opacity:.65;filter:grayscale(.5)}@media(max-width:650px){.qday{grid-template-columns:1fr}.qstats{grid-template-columns:1fr 1fr 1fr}.qstat{padding:10px}}
+</style>
+</head>
+<body>
+<header>
+<div class="kicker">Personal career development system</div>
+<h1>AI Career Path OS ✦</h1>
+<p class="subtitle">A job-first roadmap: each learning step is tied to a target role, hiring skills, a gap to close, a proof project, and trusted learning sources. Use the tabs to navigate—no nested workspace maze.</p>
+<div class="topbar" id="nav">
+<button class="navbtn active" data-view="home">🏠 Home</button>
+<button class="navbtn" data-view="roles">💼 Job Path</button>
+<button class="navbtn" data-view="roadmap">🗓 Roadmap</button><button class="navbtn" data-view="daily">📆 Daily Tracker</button><button class="navbtn" data-view="quran">🌙 Quran Journey</button>
+<button class="navbtn" data-view="skills">🧩 Skills & Gaps</button>
+<button class="navbtn" data-view="resources">🔗 Learning Sources</button>
+<button class="navbtn" data-view="portfolio">🏆 Portfolio</button>
+</div>
+</header>
+<div class="wrap">
+<section class="view active" id="home">
+<div class="hero-grid">
+<div class="panel">
+<h2>Target professional identity</h2>
+<div style="background:linear-gradient(120deg,#e7e0ff,#e4f3ff);border-radius:17px;padding:19px">
+<div class="kicker">Primary direction</div><h2 style="margin:6px 0">AI-Powered Learning Experience Designer</h2>
+<p style="margin:0;color:#5f5a78">Specialization: AI Learning & Workforce Enablement</p>
+</div>
+<p><b>Human advantage:</b> facilitation, needs analysis, judgment, stakeholder partnership, responsible adoption, and evaluation—supported by AI tools, not replaced by them.</p>
+<div class="stats"><div class="stat"><strong>18h</strong><span>Suggested weekly study</span></div><div class="stat"><strong>6</strong><span>Connected tracks</span></div><div class="stat"><strong>5–6</strong><span>Proof projects target</span></div></div>
+</div>
+<div class="panel">
+<h3>How every skill moves</h3>
+<div style="font-size:18px;font-weight:800;line-height:1.8">LEARN → PRACTICE<br>BUILD → PROVE → APPLY</div>
+<p class="subtitle">Do not count a course as career readiness until you can demonstrate the skill in a project or work sample.</p>
+<h3>Current status</h3><div class="progressbar"><span id="progress"></span></div><small id="progressText">0 evidence items checked</small>
+</div>
+</div>
+<h2>Explore your 6 tracks</h2>
+<div class="track-grid">
+<div class="track t1" data-track="1"><div class="num">TRACK 01</div><h3>AI Fluency & Applications</h3><p>LLMs · prompting · evaluation · responsible AI · tool selection</p></div>
+<div class="track t2" data-track="2"><div class="num">TRACK 02</div><h3>Instructional & Learning Design</h3><p>ADDIE · adult learning · outcomes · Bloom · assessments</p></div>
+<div class="track t3" data-track="3"><div class="num">TRACK 03</div><h3>Learning Technology</h3><p>Storyline · Rise · LMS · SCORM · accessibility · UX</p></div>
+<div class="track t4" data-track="4"><div class="num">TRACK 04</div><h3>AI Workflow & Automation</h3><p>n8n · APIs · workflow design · agents · human review</p></div>
+<div class="track t5" data-track="5"><div class="num">TRACK 05</div><h3>Career & Ecosystem</h3><p>Certifications · applications · trainers · communities · events</p></div>
+<div class="track t6" data-track="6"><div class="num">TRACK 06</div><h3>Portfolio & Evidence</h3><p>Real projects · case studies · outcomes · professional proof</p></div>
+</div>
+<div class="panel" style="margin-top:18px"><h3>Career progression (titles you can realistically target as evidence grows)</h3><div class="phase-list">
+<div class="phase"><small>Stage 1 · Early application</small><h3>Instructional Designer / Learning Content Designer</h3><p>Apply selectively now after refreshing portfolio and skills evidence.</p></div>
+<div class="phase"><small>Stage 2 · Core transition</small><h3>Learning Experience Designer</h3><p>Target after complete design-to-delivery case study and e-learning sample.</p></div>
+<div class="phase"><small>Stage 3 · Specialization</small><h3>AI Learning / AI Training Specialist</h3><p>After workshop, AI literacy content, assessment, and evaluation evidence.</p></div>
+<div class="phase"><small>Stage 4 · Advanced pathway</small><h3>AI Enablement / Adoption Specialist</h3><p>Build workflow, role-based training, change adoption, metrics and stakeholder evidence.</p></div>
+</div></div>
+</section>
+
+<section class="view" id="roles">
+<h2>Job path & readiness</h2>
+<p class="subtitle">These are target families, not promises of qualification. Remote postings can restrict country eligibility; check each posting before applying.</p>
+<div class="jobcard"><div class="stage">Stage 1 · apply selectively now</div><h3>Instructional Designer / Learning Content Designer</h3><p><b>Why you fit:</b> teaching, curriculum content, question design, presentation development, online teaching, and training experience.</p><b>Hiring skills:</b><ul><li>Needs analysis, objectives, ADDIE/SAM basics</li><li>Assessment, Bloom, adult learning</li><li>SME collaboration and content accuracy</li><li>Learning materials, storyboards, facilitation</li><li>AI-assisted development with quality review</li></ul><b>Gap to close:</b> formal end-to-end case study; assessment rationale; adult/corporate learning framing; documented outcomes.</div>
+<div class="jobcard"><div class="stage">Stage 2 · main target</div><h3>Learning Experience Designer (LXD)</h3><p><b>Hiring skills:</b> learner discovery/personas, learning journeys, UX/accessibility, prototyping, instructional strategies, facilitation, stakeholder management, evaluation/data, authoring tools and LMS familiarity.</p><b>Gap to close:</b> Storyline/Rise hands-on sample, learner research, usability feedback, metrics, polished case study, collaboration process.</div>
+<div class="jobcard"><div class="stage">Stage 3 · specialization</div><h3>AI Learning Experience Designer / AI Learning Specialist</h3><p><b>Hiring skills:</b> AI concepts and tools, prompt design, AI-enabled learning journeys, practical labs/scenarios, evaluation, responsible AI, privacy/bias, AI prototyping, workflow integration.</p><b>Gap to close:</b> teach AI with a measurable workshop; develop AI lab and prompt/evaluation rubric; document safe use and performance impact.</div>
+<div class="jobcard"><div class="stage">Stage 3 · parallel</div><h3>AI Trainer / AI Training Specialist</h3><p><b>Hiring skills:</b> facilitation, presentation, audience adaptation, practical business workflows, training materials, adult learning, AI tool fluency, responsible use, feedback and evaluation.</p><b>Gap to close:</b> recorded demo, at least 2–3 delivered workshops, attendee feedback, trainer guide, assessment and impact evidence.</div>
+<div class="jobcard"><div class="stage">Stage 4 · longer-term target</div><h3>AI Enablement / Adoption Specialist</h3><p><b>Hiring skills:</b> discovery, stakeholder communication, workflow analysis, role-based use cases, change management, training, responsible AI governance, metrics and adoption support.</p><b>Gap to close:</b> workplace AI adoption pilot, before/after workflow map, stakeholder interviews, adoption metrics, support assets and lessons learned.</div>
+<div class="jobcard"><div class="stage">Stage 4 · specialist / portfolio-led</div><h3>AI Workflow Designer / Learning Automation Builder</h3><p><b>Hiring skills:</b> process mapping, n8n/Make, APIs and data basics, prompt/structured output, error handling, human approval, privacy and documentation.</p><b>Gap to close:</b> 2 reliable demos, workflow diagrams, failure cases, test plan and clear business value.</div>
+<div class="jobcard"><div class="stage">Community pathway · opportunity based</div><h3>AI Educator / Community Educator / Ambassador</h3><p><b>Evidence:</b> consistent educational posts, open workshops, community contributions, projects, volunteer facilitation, public speaking and collaboration. These programs are selective and availability changes; treat as opportunity pathway, not guaranteed employment.</p></div>
+</section>
+
+<section class="view" id="roadmap">
+<h2>16-week roadmap · job-linked</h2>
+<p class="subtitle">First 12 weeks preserve the source plan; weeks 13–16 extend toward facilitation, enablement and job launch. 18 hours/week is the default. Portfolio and applications begin early.</p>
+<div class="phase-list">
+<div class="phase"><small>Weeks 1–4 · AI foundation</small><h3>AI Educator Foundations</h3><ul><li>AI literacy, LLMs, limitations</li><li>Responsible AI, bias, privacy</li><li>OpenAI + Anthropic + Gemini ecosystem</li><li>Build 15–20 slide AI Literacy presentation</li><li>Draft a 60-min educator workshop</li></ul><b>Role unlocked:</b> AI Educator work samples; selective trainer/ID applications.</div>
+<div class="phase"><small>Weeks 5–6 · ID foundation</small><h3>Learning Design</h3><ul><li>ADDIE, needs analysis</li><li>Learning objectives + Bloom</li><li>Assessment and differentiation</li><li>Storyboard + design rationale</li></ul><b>Role:</b> Instructional Designer readiness evidence.</div>
+<div class="phase"><small>Weeks 7–10 · production</small><h3>Digital Learning</h3><ul><li>Storyline basics, interactions</li><li>Branching, feedback, quizzes</li><li>Rise responsive design</li><li>LMS, SCORM, tracking</li><li>Accessibility/usability review</li></ul><b>Role:</b> LXD/eLearning samples.</div>
+<div class="phase"><small>Weeks 11–12 · automation</small><h3>Workflow Prototype</h3><ul><li>n8n basics</li><li>Triggers, nodes, data</li><li>Structured AI output</li><li>Human-in-the-loop & QA</li></ul><b>Role:</b> Learning automation proof.</div>
+</div>
+<div class="phase-list" style="margin-top:12px">
+<div class="phase"><small>Weeks 13–14</small><h3>Facilitation & AI Training</h3><ul><li>Workshop design and delivery</li><li>Trainer guide, lab, assessment</li><li>Collect feedback</li><li>Record a short facilitation sample</li></ul></div>
+<div class="phase"><small>Week 15</small><h3>AI Adoption Mini-Pilot</h3><ul><li>Choose a real role/task</li><li>Map current vs AI-assisted workflow</li><li>Risk and quality checks</li><li>Measure time/quality/usability</li></ul></div>
+<div class="phase"><small>Week 16</small><h3>Capstone & Job Launch</h3><ul><li>Integrated case study</li><li>Portfolio and CV</li><li>LinkedIn refresh</li><li>Role-specific applications</li><li>Communities and program monitoring</li></ul></div>
+<div class="phase"><small>Every week</small><h3>Career Actions</h3><ul><li>1 public learning post or project update</li><li>2 meaningful community interactions</li><li>Review suitable roles and eligibility</li><li>English practice tied to interview/training</li></ul></div>
+</div>
+<h3 style="margin-top:24px">Weekly mission checklist</h3><div class="panel checklist" id="weekly"></div>
+</section>
+
+
+<section class="view" id="daily">
+<h2>Daily Tracker · Week-by-week execution</h2>
+<p class="subtitle">Choose a week, follow the six daily missions (3 hours/day: Learn 60 min · Practice 90 min · Document 30 min), check tasks as you finish, and move to the next week when the weekly deliverable is complete. Each week is color-coded by its main track.</p>
+<div class="panel" style="margin-bottom:14px">
+<div class="detail-head"><div><h3 id="weekTitle" style="margin:0">Week 1</h3><p id="weekGoal" class="subtitle" style="margin:5px 0">AI foundations</p></div><div><button class="back" id="prevWeek">← Previous</button> <button class="back" id="nextWeek">Next Week →</button></div></div>
+<div id="weekButtons" style="display:flex;flex-wrap:wrap;gap:7px"></div>
+<div class="progressbar"><span id="weekProgress"></span></div><small id="weekProgressText">0/6 days complete</small>
+</div>
+<div id="dailyCards" class="cols"></div>
+<div class="panel" style="margin-top:15px"><h3>Weekly deliverable & completion gate</h3><div id="weekDeliverable"></div><label style="display:block;padding:12px 0"><input type="checkbox" id="deliverableDone"> I completed the weekly deliverable and reviewed the quality criteria.</label></div>
+<div class="panel" style="margin-top:15px"><h3>How to use the tracker</h3><ul><li>Each day has a learning source, hands-on task, and documentation/evidence.</li><li>Checkbox progress is saved in this browser on this device.</li><li>Complete the weekly deliverable—not merely the videos—before moving forward.</li><li>If you miss a day, don't skip the content. Move the mission to the next available study day.</li></ul></div>
+</section>
+
+<section class="view" id="quran">
+<h2>🌙 Quran Journey · حفظ ومراجعة وورد</h2>
+<p class="subtitle">خطة مستقلة عن الـ Career Path: حفظ صفحة يوميًا بدايةً من سورة البقرة، مراجعة متدرجة، وورد قراءة يومي ربع حزب. سجّلي إنجازك هنا؛ وعند إكمال الجزء يمكنك إصدار شهادة تقدير باسمك للطباعة.</p>
+<div class="qstats"><div class="qstat"><b id="qMemCount">0</b><span>صفحات حفظ مكتملة</span></div><div class="qstat"><b id="qReadCount">0</b><span>أرباع قراءة مكتملة</span></div><div class="qstat"><b id="qReviewCount">0</b><span>أيام مراجعة مكتملة</span></div></div>
+<div class="qpanel"><div class="qhead"><div><h3>خطة اليوم</h3><div id="qDayTitle">اليوم 1 · صفحة الحفظ 2</div></div><div class="qcontrols"><button class="qbtn" id="qPrev">السابق</button><button class="qbtn" id="qNext">اليوم التالي</button></div></div><div class="qday" id="qDay"></div></div>
+<div class="qpanel"><h3>اختاري يوم المتابعة</h3><div class="qdays" id="qDays"></div><div class="qprogress"><span id="qProgressBar"></span></div><small id="qProgressText">0% من الأيام المكتملة</small></div>
+<div class="qpanel"><h3>📚 نظام الحفظ والمراجعة</h3><ul><li><b>الحفظ الجديد:</b> صفحة واحدة يوميًا، بدءًا من صفحة 2 في مصحف المدينة (أول صفحة سورة البقرة).</li><li><b>مراجعة قريبة:</b> صفحة أمس + صفحة قبل 7 أيام (إذا كانت موجودة).</li><li><b>مراجعة أقدم:</b> كل يوم سابع خصصي مراجعة إضافية للصفحات التي حفظتيها خلال الأسبوع، مع عدم إلغاء الحفظ الجديد إلا لو محتاجة يوم تثبيت.</li><li><b>طريقة مقترحة:</b> اسمعي الصفحة 3 مرات، اقرئيها نظرًا 5 مرات، قسّميها مقاطع، احفظي كل مقطع واربطي المقاطع، ثم سمّعي الصفحة غيبًا وسجّلي مواضع الخطأ.</li><li>لو يوم فات، لا تعوّضي بصفحتين؛ كمّلي من نفس رقم اليوم التالي واعتبري الخطة مرنة.</li></ul></div>
+<div class="qpanel"><h3>🏅 شهادات إتمام الأجزاء</h3><p>تُفتح الشهادة عند اكتمال الصفحات المحددة للجزء في مصحف المدينة. الشهادة تقدير شخصي تصدر باسمك وباعتبارك صاحبة رحلة الإنجاز، وليست شهادة جهة دينية أو اعتماد رسمي.</p><div id="qCertificates" class="qcerts"></div></div>
+<div class="qpanel"><h3>ملاحظة للحفظ</h3><textarea id="qNotes" placeholder="اكتبي هنا مواضع المتشابهات، الأخطاء، أو ملاحظات التسميع..."></textarea><button class="qbtn" id="qSaveNotes">حفظ الملاحظات</button><span id="qNoteSaved"></span></div>
+</section>
+<section class="view" id="skills">
+<h2>Skill matrix · gaps to close</h2>
+<p class="subtitle">Initial assessment based on known experience. “Validate” means we should test with a work sample, not assume mastery or deficiency.</p>
+<div class="panel"><table><thead><tr><th>Skill cluster</th><th>Current evidence</th><th>Target level</th><th>Gap / proof needed</th></tr></thead><tbody>
+<tr><td>Teaching & facilitation</td><td><span class="pill ready">Strong existing experience</span></td><td>Advanced</td><td>Record a workshop; capture feedback and learning results.</td></tr>
+<tr><td>Content / curriculum</td><td><span class="pill ready">Existing experience</span></td><td>Professional</td><td>Storyboard, rationale, end-to-end design case study.</td></tr>
+<tr><td>AI fluency (ChatGPT/Claude/Gemini)</td><td><span class="pill validate">Validate</span></td><td>Advanced practical</td><td>Compare tools; prompting/context; evaluation; safe-use protocol.</td></tr>
+<tr><td>AI literacy / Responsible AI</td><td><span class="pill gap">Build systematically</span></td><td>Trainer-ready</td><td>Explain LLMs, hallucination, bias, privacy, human review.</td></tr>
+<tr><td>ADDIE / learning needs</td><td><span class="pill validate">Refresh + evidence</span></td><td>Professional</td><td>Conduct learner/task analysis and document decisions.</td></tr>
+<tr><td>Objectives / Bloom / assessment</td><td><span class="pill validate">Refresh + evidence</span></td><td>Professional</td><td>Aligned objective-assessment map, rubric, question-quality review.</td></tr>
+<tr><td>Storyline / Rise</td><td><span class="pill gap">Priority gap</span></td><td>Working proficiency</td><td>Build 10–15 min module with branching, feedback, accessibility.</td></tr>
+<tr><td>LMS / SCORM / xAPI</td><td><span class="pill gap">Priority gap</span></td><td>Working knowledge</td><td>Publish/test package; explain tracking/completion and reports.</td></tr>
+<tr><td>Learning analytics</td><td><span class="pill gap">Build</span></td><td>Applied</td><td>Analyze completion, scores, learner feedback; recommend change.</td></tr>
+<tr><td>Automation / n8n</td><td><span class="pill gap">Build</span></td><td>2 reliable workflows</td><td>Workflow diagram, data handling, errors, approval, QA.</td></tr>
+<tr><td>APIs / technical literacy</td><td><span class="pill gap">Foundational</span></td><td>Basic fluency</td><td>Understand API, JSON, webhooks, credentials, no-code integration.</td></tr>
+<tr><td>UX / accessibility / prototyping</td><td><span class="pill validate">Validate</span></td><td>Applied</td><td>Prototype, test with users, accessibility checklist.</td></tr>
+<tr><td>Stakeholders / consulting</td><td><span class="pill validate">Build evidence</span></td><td>Confident</td><td>Discovery questions, brief, feedback rounds, client-facing demo.</td></tr>
+<tr><td>English professional communication</td><td><span class="pill validate">Current level B1 noted</span></td><td>B2+/workplace fluency</td><td>Portfolio writing, presentations, interview answers, facilitation.</td></tr>
+<tr><td>Community / public authority</td><td><span class="pill validate">Build visibility</span></td><td>Consistent contributor</td><td>Posts, workshops, event participation, contribution log.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="view" id="resources">
+<h2>Learning source library</h2>
+<p class="subtitle">Official or primary sources first. Links are embedded in the path. Use a resource only when it serves a current gap; no random course collecting.</p>
+<div class="cols">
+<div class="panel"><h3>AI & AI Fluency</h3>
+<div class="resource"><a href="https://academy.openai.com/pages/courses" target="_blank">OpenAI Academy — Courses</a><p>Educator/AI learning; choose course aligned to current week.</p></div>
+<div class="resource"><a href="https://academy.claude.com/courses/ai-fluency-for-educators" target="_blank">Anthropic — AI Fluency for Educators</a><p>AI collaboration framework and educator applications.</p></div>
+<div class="resource"><a href="https://academy.claude.com/courses/teaching-ai-fluency" target="_blank">Anthropic — Teaching AI Fluency</a><p>Prepare to teach AI fluency; workshop-focused learning.</p></div>
+<div class="resource"><a href="https://learn.microsoft.com/training/" target="_blank">Microsoft Learn</a><p>AI fundamentals, generative AI, Responsible AI, Copilot education paths.</p></div>
+<div class="resource"><a href="https://edu.google.com/learning-center/certifications/" target="_blank">Google Educator Certifications</a><p>Certification preparation and official educator learning center.</p></div>
+<div class="resource"><a href="https://ai.meta.com/learn/" target="_blank">Meta AI learning</a><p>AI literacy and Llama ecosystem awareness.</p></div>
+</div>
+<div class="panel"><h3>Instructional Design & Learning</h3>
+<div class="resource"><a href="https://www.coursera.org/learn/learning-experience-design" target="_blank">Coursera — Learning Experience Design search</a><p>Use as a structured supplement; prioritize practice and project evidence.</p></div>
+<div class="resource"><a href="https://www.coursera.org/learn/instructional-design" target="_blank">Coursera — Instructional Design search</a><p>Foundations and design process; select course based on identified gap.</p></div>
+<div class="resource"><a href="https://www.learningguild.com/" target="_blank">The Learning Guild</a><p>Practice, articles, webinars, L&D community.</p></div>
+<div class="resource"><a href="https://www.td.org/" target="_blank">ATD</a><p>Training, facilitation, talent development and workplace learning.</p></div>
+</div>
+<div class="panel"><h3>Learning Technology</h3>
+<div class="resource"><a href="https://www.articulate.com/360/" target="_blank">Articulate 360 — Storyline & Rise</a><p>Tool overview and official product resources. Build a sample before considering paid subscription.</p></div>
+<div class="resource"><a href="https://community.articulate.com/" target="_blank">Articulate Community</a><p>Examples, tutorials and troubleshooting.</p></div>
+<div class="resource"><a href="https://scorm.com/" target="_blank">SCORM.com</a><p>SCORM basics, packaging and testing concepts.</p></div>
+</div>
+<div class="panel"><h3>Automation & AI Workflows</h3>
+<div class="resource"><a href="https://docs.n8n.io/" target="_blank">n8n Official Docs</a><p>Nodes, triggers, workflows, credentials, error handling and AI integrations.</p></div>
+<div class="resource"><a href="https://n8n.io/academy/" target="_blank">n8n Academy</a><p>Structured hands-on learning.</p></div>
+<div class="resource"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview" target="_blank">MDN — HTTP basics</a><p>API/web request foundations for no-code automation.</p></div>
+<div class="resource"><a href="https://www.postman.com/learn/" target="_blank">Postman Learning</a><p>API concepts and testing, optional foundational support.</p></div>
+</div>
+<div class="panel"><h3>Career & Community Ecosystems</h3>
+<div class="resource"><a href="https://edu.google.com/for-educators/certification-programs/professional-expertise/certified-trainer/" target="_blank">Google Certified Trainer</a><p>Requirements and application readiness; build evidence before applying.</p></div>
+<div class="resource"><a href="https://www.canva.com/community/" target="_blank">Canva Community</a><p>Community programs and creator opportunities—check current openings.</p></div>
+<div class="resource"><a href="https://www.canva.com/creators/" target="_blank">Canva Creators</a><p>Creator opportunity and portfolio requirements.</p></div>
+<div class="resource"><a href="https://developers.google.com/community/gdg" target="_blank">Google Developer Groups</a><p>Attend events, contribute, and propose a session after building evidence.</p></div>
+<div class="resource"><a href="https://www.linkedin.com/jobs/" target="_blank">LinkedIn Jobs</a><p>Search target titles; filter remote and verify country eligibility.</p></div>
+</div>
+</div>
+</section>
+
+<section class="view" id="portfolio">
+<h2>Portfolio: evidence that makes you hireable</h2>
+<div class="cols">
+<div class="panel"><h3>1 · AI-Powered Lesson Design</h3><p>Problem, learner profile, objectives, lesson flow, AI prompts, critique, human revisions, assessment alignment.</p><b>Proof:</b> case study + prompt log + final lesson.</div>
+<div class="panel"><h3>2 · AI Assessment Design</h3><p>Question bank with Bloom mapping, distractor rationale, quality rubric, bias/accuracy review.</p><b>Proof:</b> sample bank + evaluation sheet.</div>
+<div class="panel"><h3>3 · AI Fluency Workshop</h3><p>60–90 minute workshop with objectives, agenda, demo, hands-on activity, facilitator guide, quiz and feedback.</p><b>Proof:</b> delivered session, recording, participant feedback.</div>
+<div class="panel"><h3>4 · Interactive E-learning</h3><p>10–15 min module in Storyline/Rise, scenario, interaction, feedback, accessibility, publish/test.</p><b>Proof:</b> demo + source outline + QA report.</div>
+<div class="panel"><h3>5 · Learning Analytics</h3><p>Use sample or anonymized learning data to diagnose completion/performance and recommend interventions.</p><b>Proof:</b> dashboard + insight memo.</div>
+<div class="panel"><h3>6 · Educational AI Automation</h3><p>Workflow for content-to-question extraction/tagging/review with approval gate and error handling.</p><b>Proof:</b> live demo + diagram + test cases.</div>
+<div class="panel" style="grid-column:1/-1;background:linear-gradient(120deg,#e9e2ff,#e0f3f1)"><h3>Capstone · AI Learning & Enablement System</h3><p>Role-based learning program + tool matrix + prompt library + workflow + AI knowledge assistant prototype (optional advanced) + workshop + assessment + evaluation + 3–5 minute demo video.</p><b>Target evidence:</b> a case study that shows you can design, teach, build, evaluate and responsibly lead AI adoption—not only produce content.</div>
+</div>
+</section>
+<div class="footer">This is a first working roadmap, not a guarantee of job eligibility. Role requirements and remote-country restrictions vary by employer. Verify live postings before applying. Roadmap and progress are editable in this local browser file; use the checklist to mark completed evidence.</div>
+</div>
+<script>
+const nav=document.querySelectorAll('.navbtn'),views=document.querySelectorAll('.view');
+function show(id){views.forEach(v=>v.classList.toggle('active',v.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo({top:0,behavior:'smooth'});}
+nav.forEach(b=>b.onclick=()=>show(b.dataset.view));
+document.querySelectorAll('.track').forEach(t=>t.onclick=()=>show('skills'));
+const tasks=[
+"Week 1: AI literacy foundation + draft AI Literacy for Educators presentation",
+"Week 2: Anthropic AI Fluency / 4D + documented collaboration framework",
+"Week 3: Teaching AI Fluency + workshop blueprint",
+"Week 4: Gemini/Google educator preparation + practical lesson",
+"Week 5: ADDIE, needs analysis, objectives, Bloom + storyboard",
+"Week 6: Assessment, differentiated learning + aligned assessment set",
+"Week 7: Storyline fundamentals + first interactive prototype",
+"Week 8: Branching scenario, quiz, feedback + QA",
+"Week 9: Rise responsive mini-course + accessibility check",
+"Week 10: LMS/SCORM basics + test package and tracking",
+"Week 11: n8n fundamentals + first workflow",
+"Week 12: Automation project + portfolio case study",
+"Week 13: Facilitation skills + run a practice workshop",
+"Week 14: Deliver workshop + collect feedback and evaluation",
+"Week 15: AI adoption pilot + workflow before/after + metrics",
+"Week 16: Capstone, CV, portfolio, role-specific applications"
+];
+const list=document.getElementById('weekly');list.innerHTML=tasks.map((t,i)=>`<label><input type="checkbox" data-i="${i}">${t}</label>`).join('');
+const boxes=[...list.querySelectorAll('input')];
+function update(){let n=boxes.filter(x=>x.checked).length;document.getElementById('progress').style.width=(n/tasks.length*100)+'%';document.getElementById('progressText').textContent=n+' of '+tasks.length+' weekly missions checked';}
+boxes.forEach(x=>x.addEventListener('change',update));update();
+
+const dailyWeeks=[
+{title:"Week 1 · AI Fluency Foundations",goal:"Understand AI basics and build your first AI-for-educators artifact.",track:"Track 01 · AI Fluency",color:"#6b9bd5",bg:"#e3efff",deliver:"Create an AI Literacy mini-presentation (15–20 slides or equivalent) plus a short responsible-use checklist.",days:[
+["Day 1 · AI & LLM basics","Learn: what generative AI/LLMs are, capabilities and limitations.","Practice: test ChatGPT on 3 educational tasks; note strengths, mistakes and where verification is needed.","Document: 1-page AI/LLM glossary and observations.","https://academy.openai.com/pages/courses"],
+["Day 2 · Prompting & context","Learn: prompt components, context, clear instructions, constraints and examples.","Practice: write and iterate 5 prompts for teaching, lesson planning and assessment.","Document: prompt before/after examples and why revisions improved results.","https://academy.openai.com/pages/courses"],
+["Day 3 · Compare AI tools","Learn: compare tool use cases, strengths, limitations and source handling.","Practice: run one identical task through ChatGPT, Claude and Gemini; compare output quality.","Document: comparison table and tool-selection rules.","https://academy.claude.com/courses/ai-fluency-for-educators"],
+["Day 4 · Responsible AI","Learn: hallucinations, bias, privacy, verification and human responsibility.","Practice: audit AI-generated educational content with a checklist; identify and correct issues.","Document: responsible AI checklist for educators.","https://academy.claude.com/courses/ai-fluency-for-educators"],
+["Day 5 · AI collaboration","Learn: AI as collaborator; define delegation and human review.","Practice: build a repeatable workflow: brief → AI draft → critique → revision → final QA.","Document: workflow map and reflection.","https://academy.claude.com/courses/ai-fluency-for-educators"],
+["Day 6 · Build & review","Learn: review key concepts; fill gaps from notes.","Practice: assemble your AI Literacy presentation and test it with 3 sample prompts/tasks.","Document: final artifact, sources, limitations and next-week readiness review.","https://academy.openai.com/pages/courses"]]},
+{title:"Week 2 · Anthropic AI Fluency & 4D",goal:"Use the 4D framework to make your AI collaboration intentional.",track:"Track 01 · AI Fluency",color:"#6b9bd5",bg:"#e3efff",deliver:"Create an AI Collaboration Framework for Learning Designers with examples of Delegation, Description, Discernment and Diligence.",days:[
+["Day 1 · 4D overview","Learn the AI Fluency framework and its four dimensions.","Practice: map one existing work task to all four dimensions.","Document: 4D notes and personal examples.","https://academy.claude.com/courses/ai-fluency-for-educators"],
+["Day 2 · Delegation","Learn what tasks to delegate and what must stay human-led.","Practice: create a task delegation matrix for lesson design.","Document: AI/human responsibility table.","https://academy.claude.com/courses/ai-fluency-for-educators"],
+["Day 3 · Description","Learn to communicate task, context, audience, format and constraints.","Practice: refine 3 prompts using structured descriptions.","Document: prompt templates with context and constraints.","https://academy.claude.com/courses/ai-fluency-for-educators"],
+["Day 4 · Discernment","Learn to judge output quality, reliability, bias and fit.","Practice: score 3 AI outputs using a rubric; revise one.","Document: evaluation rubric and annotated sample.","https://academy.claude.com/courses/ai-fluency-for-educators"],
+["Day 5 · Diligence","Learn human oversight, privacy and accountability.","Practice: create a QA workflow and risk checklist for AI-supported learning content.","Document: quality and safety protocol.","https://academy.claude.com/courses/ai-fluency-for-educators"],
+["Day 6 · Synthesis","Review 4D and identify personal workflow changes.","Practice: combine framework and examples into a reusable guide.","Document: finished AI Collaboration Framework + reflection.","https://academy.claude.com/courses/ai-fluency-for-educators"]]},
+{title:"Week 3 · Teaching AI Fluency",goal:"Translate AI fluency into a teachable workshop for educators.",track:"Track 05 · Training & Facilitation",color:"#c16b88",bg:"#ffe5ee",deliver:"Draft a 60-minute AI Fluency workshop blueprint: audience, objectives, agenda, demo, hands-on practice, assessment and trainer notes.",days:[
+["Day 1 · Course orientation","Learn the Teaching AI Fluency course structure and learning goals.","Practice: identify the educator audience and 3 learner needs.","Document: audience profile and needs.","https://academy.claude.com/courses/teaching-ai-fluency"],
+["Day 2 · Learning outcomes","Learn how to turn AI fluency into observable outcomes.","Practice: write 4 measurable workshop objectives.","Document: objective-to-evidence map.","https://academy.claude.com/courses/teaching-ai-fluency"],
+["Day 3 · Workshop flow","Learn facilitation and activity sequencing.","Practice: plan opening, demonstration, guided practice and reflection.","Document: 60-minute agenda with timings.","https://academy.claude.com/courses/teaching-ai-fluency"],
+["Day 4 · Practical lab","Learn hands-on activity design and safe AI practice.","Practice: create a participant task using an AI tool and a verification step.","Document: lab instructions and expected output.","https://academy.claude.com/courses/teaching-ai-fluency"],
+["Day 5 · Assessment & feedback","Learn how to evaluate workshop outcomes.","Practice: build exit ticket, confidence check and feedback form.","Document: evaluation package.","https://academy.claude.com/courses/teaching-ai-fluency"],
+["Day 6 · Blueprint","Review and finish course lessons relevant to workshop design.","Practice: assemble and rehearse workshop blueprint.","Document: trainer blueprint + rehearsal notes.","https://academy.claude.com/courses/teaching-ai-fluency"]]},
+{title:"Week 4 · Google/Gemini Educator pathway",goal:"Explore Google educator AI tools and prepare a credential-aligned sample.",track:"Track 01 · AI Fluency",color:"#6b9bd5",bg:"#e3efff",deliver:"Build one AI-supported lesson/activity and complete a certification readiness checklist. Verify exam availability and current requirements before booking.",days:[
+["Day 1 · Certification map","Review current Google educator certification paths and requirements.","Practice: identify the credential relevant to your target and list assessed competencies.","Document: certification plan and eligibility notes.","https://edu.google.com/learning-center/certifications/"],
+["Day 2 · Gemini in education","Study official educator resources and AI use cases.","Practice: use Gemini to draft a lesson support resource; validate all claims.","Document: sample and verification log.","https://edu.google.com/learning-center/"],
+["Day 3 · Classroom/workflow use","Explore productivity and teaching workflows.","Practice: create a workflow for planning, differentiation or feedback.","Document: workflow plus human review.","https://edu.google.com/learning-center/"],
+["Day 4 · AI safety & educator judgment","Review safe use, privacy and responsible classroom practice.","Practice: assess a sample activity for age, privacy, accuracy and bias concerns.","Document: risk review.","https://edu.google.com/learning-center/"],
+["Day 5 · Practice assessment","Review the certification objectives and practice where official materials provide it.","Practice: complete self-check and identify weak areas.","Document: readiness score and gap list.","https://edu.google.com/learning-center/certifications/"],
+["Day 6 · Credential decision","Review evidence and exam/application requirements.","Practice: finish lesson artifact; decide whether ready to pursue credential now or later.","Document: lesson sample + certification action plan.","https://edu.google.com/learning-center/certifications/"]]},
+{title:"Week 5 · ADDIE & Learning Needs",goal:"Build the front end of a learning design project: needs, audience, problem and objectives.",track:"Track 02 · Instructional Design",color:"#65a57b",bg:"#e3f4e9",deliver:"Create a Learning Design Brief and analysis for one real training need (preferably an anonymized workplace/education topic).",days:[
+["Day 1 · ADDIE overview","Learn Analysis, Design, Development, Implementation and Evaluation.","Practice: map your chosen project across ADDIE.","Document: project scope and ADDIE map.","https://www.learningguild.com/"],
+["Day 2 · Needs analysis","Learn performance gap vs knowledge gap and learner/context analysis.","Practice: draft 8 discovery questions and analyze a target audience.","Document: needs-analysis template.","https://www.td.org/"],
+["Day 3 · Learner profile","Learn learner characteristics, prior knowledge, constraints and context.","Practice: create a learner persona and environment map.","Document: learner profile.","https://www.learningguild.com/"],
+["Day 4 · Performance problem","Learn to define measurable workplace/learning problems.","Practice: write problem statement, desired behavior and success evidence.","Document: problem statement.","https://www.td.org/"],
+["Day 5 · Objectives & Bloom","Learn observable objectives and Bloom verbs.","Practice: write 5 aligned measurable objectives.","Document: objectives and alignment notes.","https://www.learningguild.com/"],
+["Day 6 · Analysis brief","Review the analysis and objective quality.","Practice: assemble design brief for review.","Document: brief + acceptance criteria.","https://www.td.org/"]]},
+{title:"Week 6 · Assessment & Learning Strategies",goal:"Align assessment with objectives; apply feedback, practice and differentiation.",track:"Track 02 · Instructional Design",color:"#65a57b",bg:"#e3f4e9",deliver:"Produce an assessment blueprint, 8–10 questions/tasks, scoring rubric and rationale for one learning module.",days:[
+["Day 1 · Alignment","Learn constructive alignment: objectives, activities and assessment.","Practice: create an objective-activity-assessment map.","Document: alignment matrix.","https://www.learningguild.com/"],
+["Day 2 · Question design","Learn question formats, distractors and item quality.","Practice: write 5 MCQs with rationales and review for ambiguity.","Document: question-quality checklist.","https://www.td.org/"],
+["Day 3 · Feedback","Learn formative feedback and corrective guidance.","Practice: write feedback for correct, incorrect and partially correct responses.","Document: feedback bank.","https://www.learningguild.com/"],
+["Day 4 · Practice & transfer","Learn practice, retrieval and transfer to real contexts.","Practice: design a scenario and decision-based activity.","Document: scenario storyboard.","https://www.td.org/"],
+["Day 5 · Differentiation","Learn ways to adapt support and challenge to learner needs.","Practice: create 3 levels of support for one activity.","Document: differentiation plan.","https://www.learningguild.com/"],
+["Day 6 · Assessment blueprint","Review alignment and quality.","Practice: compile blueprint, assessment, rubric and answer rationales.","Document: assessment package.","https://www.td.org/"]]},
+{title:"Week 7 · Storyline Foundations",goal:"Start authoring an interactive learning module.",track:"Track 03 · Learning Technology",color:"#9275cc",bg:"#e9e2ff",deliver:"Create a 3–5 minute Storyline prototype with navigation, one interaction and feedback.",days:[
+["Day 1 · Tool orientation","Explore Storyline interface, slides, player and preview.","Practice: create project, theme and 3-slide structure.","Document: screenshots and tool notes.","https://www.articulate.com/360/"],
+["Day 2 · Layout & media","Learn slide layout, text, images, accessibility basics.","Practice: build a content slide with visual hierarchy.","Document: design decisions.","https://community.articulate.com/"],
+["Day 3 · States","Learn object states and simple interaction logic.","Practice: create clickable object with states.","Document: interaction description.","https://community.articulate.com/"],
+["Day 4 · Layers","Learn layers and triggers at beginner level.","Practice: create reveal interaction with layer and close control.","Document: trigger map.","https://community.articulate.com/"],
+["Day 5 · Quiz","Learn quiz question types and feedback.","Practice: build one question with feedback.","Document: assessment screenshot and QA.","https://community.articulate.com/"],
+["Day 6 · Prototype","Review learner flow and test navigation.","Practice: assemble 3–5 minute mini-module.","Document: prototype + test checklist.","https://www.articulate.com/360/"]]},
+{title:"Week 8 · Storyline Branching & Feedback",goal:"Build a scenario with choices, consequences and meaningful feedback.",track:"Track 03 · Learning Technology",color:"#9275cc",bg:"#e9e2ff",deliver:"Publish a branching scenario prototype and document logic, testing and learner feedback.",days:[
+["Day 1 · Scenario design","Learn decision-based scenarios and realistic choices.","Practice: storyboard a 3-choice decision scenario.","Document: scenario storyboard.","https://community.articulate.com/"],
+["Day 2 · Variables & triggers","Study basic variables/triggers used for branching.","Practice: build choice logic and outcome screens.","Document: logic map.","https://community.articulate.com/"],
+["Day 3 · Feedback design","Learn consequences and feedback that support transfer.","Practice: write tailored feedback for each decision.","Document: feedback rationale.","https://community.articulate.com/"],
+["Day 4 · Build","Practice implementation and navigation.","Practice: implement scenario in Storyline.","Document: screenshots and notes.","https://community.articulate.com/"],
+["Day 5 · Test","Learn usability and QA testing basics.","Practice: test all paths, links, keyboard navigation and scoring.","Document: bug/QA log.","https://community.articulate.com/"],
+["Day 6 · Publish prototype","Review and publish/share prototype if available.","Practice: demo to one reviewer and collect feedback.","Document: final prototype + feedback summary.","https://www.articulate.com/360/"]]},
+{title:"Week 9 · Rise Responsive E-learning",goal:"Create a responsive microlearning course and compare its design with Storyline.",track:"Track 03 · Learning Technology",color:"#9275cc",bg:"#e9e2ff",deliver:"Create a short Rise course with sections, practice, knowledge check and accessibility review.",days:[
+["Day 1 · Rise structure","Learn blocks, lessons and course navigation.","Practice: set course outline and theme.","Document: outline.","https://www.articulate.com/360/"],
+["Day 2 · Content blocks","Learn text, visual, process and accordion blocks.","Practice: build 2 lessons with varied blocks.","Document: design rationale.","https://community.articulate.com/"],
+["Day 3 · Practice","Learn interactive and knowledge-check options.","Practice: add practice and a knowledge check.","Document: objective alignment.","https://community.articulate.com/"],
+["Day 4 · Responsive design","Learn mobile-first layout and readability.","Practice: inspect mobile/tablet preview and revise.","Document: responsive QA.","https://www.articulate.com/360/"],
+["Day 5 · Accessibility","Review accessibility basics: headings, contrast, alt text and keyboard use.","Practice: audit course and correct issues.","Document: accessibility checklist.","https://community.articulate.com/"],
+["Day 6 · Finish","Review learner flow and content quality.","Practice: publish/share preview and test with a reviewer.","Document: course + review notes.","https://www.articulate.com/360/"]]},
+{title:"Week 10 · LMS, SCORM & Learning Analytics",goal:"Understand publishing, LMS delivery and completion/reporting.",track:"Track 03 · Learning Technology",color:"#9275cc",bg:"#e9e2ff",deliver:"Document a tested publishing path and create a simple learning-results dashboard/report from sample data.",days:[
+["Day 1 · LMS basics","Learn LMS roles, course, enrollment and learner records.","Practice: map a learner journey through an LMS.","Document: LMS glossary and flow.","https://scorm.com/"],
+["Day 2 · SCORM concepts","Learn SCORM purpose, package and tracking concepts.","Practice: compare SCORM 1.2 and 2004 at a high level.","Document: comparison sheet.","https://scorm.com/"],
+["Day 3 · Publish settings","Learn completion, passing score and tracking settings.","Practice: choose settings for your sample module.","Document: publish configuration rationale.","https://www.articulate.com/360/"],
+["Day 4 · Testing","Learn package testing and troubleshooting.","Practice: test available preview/package; record errors and limitations.","Document: test log.","https://scorm.com/"],
+["Day 5 · Learning data","Learn completion, score, attempts and feedback metrics.","Practice: analyze a sample dataset or create synthetic sample data clearly labeled.","Document: 3 insights and recommendations.","https://www.learningguild.com/"],
+["Day 6 · Report","Review LMS/SCORM and analytics.","Practice: build simple report/dashboard and recommend one intervention.","Document: report + decision memo.","https://www.learningguild.com/"]]},
+{title:"Week 11 · n8n Fundamentals",goal:"Understand workflow logic and build your first automation.",track:"Track 04 · AI Automation",color:"#d49a55",bg:"#fff0df",deliver:"Build a basic workflow with a trigger, multiple steps, data transformation and test documentation.",days:[
+["Day 1 · Workflow concepts","Learn triggers, nodes, connections and workflow structure.","Practice: map a manual task into steps and inputs/outputs.","Document: process map.","https://docs.n8n.io/"],
+["Day 2 · First workflow","Learn node configuration and execution.","Practice: build a simple trigger-to-action workflow.","Document: workflow screenshot and explanation.","https://n8n.io/academy/"],
+["Day 3 · Data handling","Learn JSON/data fields and mapping.","Practice: pass data between nodes and transform fields.","Document: input/output sample.","https://docs.n8n.io/"],
+["Day 4 · Branching","Learn conditions and routing.","Practice: build if/else path based on a value.","Document: logic diagram.","https://docs.n8n.io/"],
+["Day 5 · AI node","Learn AI integration and structured output concepts.","Practice: generate a structured response for a learning task.","Document: prompt, schema and output review.","https://docs.n8n.io/"],
+["Day 6 · Workflow test","Learn execution history and basic debugging.","Practice: test normal, missing and invalid input cases.","Document: test cases and first workflow demo.","https://n8n.io/academy/"]]},
+{title:"Week 12 · Educational Automation Project",goal:"Build an automation that assists learning content/question workflow while keeping human review.",track:"Track 04 · AI Automation",color:"#d49a55",bg:"#fff0df",deliver:"Create a demo workflow: source content → extract/structure → draft question or tags → human review → export; include test cases and safeguards.",days:[
+["Day 1 · Scope & design","Learn process mapping and automation suitability.","Practice: choose workflow and define inputs, outputs and boundaries.","Document: workflow brief.","https://docs.n8n.io/"],
+["Day 2 · Build ingestion","Learn file/text input and extraction options available in your setup.","Practice: prototype ingestion and structured text output.","Document: input handling and limitations.","https://docs.n8n.io/"],
+["Day 3 · AI processing","Learn structured output and prompt constraints.","Practice: draft questions/tags from supplied source only; flag uncertain outputs.","Document: prompt and schema.","https://docs.n8n.io/"],
+["Day 4 · Human approval","Learn human-in-the-loop design.","Practice: add review/approval stage before final export.","Document: review gate and responsibility map.","https://docs.n8n.io/"],
+["Day 5 · Error handling","Learn failure paths and retries at a basic level.","Practice: test missing content, malformed output and low-confidence cases.","Document: test and failure log.","https://docs.n8n.io/"],
+["Day 6 · Case study","Review workflow reliability, privacy and usefulness.","Practice: demo workflow; measure time saved on a small test sample if possible.","Document: case study, diagram, demo and limitations.","https://n8n.io/academy/"]]},
+{title:"Week 13 · Facilitation & Workshop Delivery",goal:"Strengthen human-centered trainer skills and prepare a practice session.",track:"Track 05 · Training & Facilitation",color:"#c16b88",bg:"#ffe5ee",deliver:"Rehearse a 20–30 minute micro-workshop; produce facilitator guide, slides, activity and evaluation.",days:[
+["Day 1 · Facilitation basics","Learn session openings, transitions, questioning and engagement.","Practice: script workshop opening and 3 transitions.","Document: facilitator notes.","https://www.td.org/"],
+["Day 2 · Audience engagement","Learn activity design and learner participation.","Practice: create one paired/group activity or solo lab.","Document: instructions and timing.","https://www.learningguild.com/"],
+["Day 3 · Demonstration skills","Learn live-demo planning and backup strategies.","Practice: rehearse AI demo with expected and unexpected outputs.","Document: demo script and contingency plan.","https://academy.claude.com/courses/teaching-ai-fluency"],
+["Day 4 · Handling questions","Learn clarification, parking-lot questions and uncertainty communication.","Practice: prepare answers to 10 likely participant questions.","Document: FAQ.","https://www.td.org/"],
+["Day 5 · Micro-teach rehearsal","Review delivery and self-evaluation.","Practice: record a 20–30 minute rehearsal; evaluate clarity, pacing and engagement.","Document: self-review and improvement plan.","https://www.learningguild.com/"],
+["Day 6 · Trainer package","Review materials and accessibility.","Practice: assemble facilitator guide, slide deck, activity and feedback form.","Document: complete workshop package.","https://academy.claude.com/courses/teaching-ai-fluency"]]},
+{title:"Week 14 · Deliver & Evaluate Training",goal:"Deliver a real workshop to a small audience and gather evidence.",track:"Track 05 · Training & Facilitation",color:"#c16b88",bg:"#ffe5ee",deliver:"Deliver the workshop; collect feedback and an assessment; write a short evaluation report. If delivery isn't possible, conduct a pilot and label it clearly.",days:[
+["Day 1 · Invite & define","Learn participant recruitment and consent/privacy considerations.","Practice: invite participants and set expectations.","Document: participant plan.","https://www.td.org/"],
+["Day 2 · Pre-assessment","Learn baseline assessment and confidence checks.","Practice: create a short pre-check and consent-aware feedback form.","Document: assessment tools.","https://www.learningguild.com/"],
+["Day 3 · Final preparation","Review facilitator plan and run-of-show.","Practice: check links, demo accounts, materials and contingency plan.","Document: readiness checklist.","https://academy.claude.com/courses/teaching-ai-fluency"],
+["Day 4 · Delivery","Facilitate the session or pilot.","Practice: deliver and note participation/questions.","Document: delivery log (no personal sensitive info).","https://academy.claude.com/courses/teaching-ai-fluency"],
+["Day 5 · Feedback analysis","Learn simple feedback and assessment analysis.","Practice: summarize responses and identify strengths/gaps.","Document: anonymized findings.","https://www.learningguild.com/"],
+["Day 6 · Improvement","Learn evaluation and iteration.","Practice: revise workshop based on evidence.","Document: workshop case study and next iteration.","https://www.td.org/"]]},
+{title:"Week 15 · AI Adoption Mini-Pilot",goal:"Demonstrate how you analyze a work process and support responsible AI adoption.",track:"Track 05 · Training & Facilitation",color:"#c16b88",bg:"#ffe5ee",deliver:"Create an adoption pilot case study: current workflow, proposed AI-supported workflow, risk controls, training support, and a simple before/after measure.",days:[
+["Day 1 · Select a task","Learn discovery and use-case selection.","Practice: choose a low-risk repetitive task and define the user.","Document: pilot brief.","https://learn.microsoft.com/training/"],
+["Day 2 · Current workflow","Learn process mapping and baseline measurement.","Practice: map steps, friction, time or quality baseline (estimate only if labeled).","Document: current-state map.","https://docs.n8n.io/"],
+["Day 3 · AI-assisted design","Learn use-case fit and responsible AI checks.","Practice: map future workflow and identify human decision points.","Document: future-state map.","https://learn.microsoft.com/training/"],
+["Day 4 · Prototype","Learn iterative prototyping and user testing.","Practice: prototype prompt/tool/workflow; test with examples.","Document: demo and test notes.","https://docs.n8n.io/"],
+["Day 5 · Enablement","Learn role-based training and adoption support.","Practice: create quick guide, training outline and FAQs.","Document: enablement kit.","https://www.td.org/"],
+["Day 6 · Evaluate","Learn outcome measures and limitations.","Practice: compare baseline vs pilot on time, quality or user confidence where measurable.","Document: pilot report and recommendations.","https://www.learningguild.com/"]]},
+{title:"Week 16 · Capstone & Job Launch",goal:"Integrate your evidence into a coherent portfolio and begin role-specific applications.",track:"Track 06 · Portfolio & Career",color:"#55a69b",bg:"#dff3f1",deliver:"Publish a coherent portfolio, CV and LinkedIn profile; prepare tailored application materials and a role-readiness matrix.",days:[
+["Day 1 · Portfolio audit","Learn case-study storytelling and evidence standards.","Practice: inventory projects, artifacts, outcomes and gaps.","Document: portfolio map.","https://www.linkedin.com/jobs/"],
+["Day 2 · Case study writing","Learn concise problem/process/outcome storytelling.","Practice: draft 2 case studies using problem, process, design, evidence, reflection.","Document: drafts.","https://www.learningguild.com/"],
+["Day 3 · CV & LinkedIn","Learn role-specific positioning and evidence-based bullets.","Practice: update headline, About, skills and CV for LXD/AI Learning roles.","Document: tailored CV/profile.","https://www.linkedin.com/jobs/"],
+["Day 4 · Job analysis","Learn how to read postings and extract requirements.","Practice: analyze 5 live job descriptions; classify must-have, preferred and gaps.","Document: job-market skills matrix.","https://www.linkedin.com/jobs/"],
+["Day 5 · Applications & networking","Learn targeted application and outreach strategy.","Practice: prepare 2 applications and 2 networking messages; submit if suitable.","Document: application tracker entries.","https://www.linkedin.com/jobs/"],
+["Day 6 · Review & next cycle","Review readiness, project quality and feedback.","Practice: present capstone in a 3–5 minute demo; set next 4-week goals.","Document: career readiness review and next roadmap.","https://www.linkedin.com/jobs/"]]}
+];
+let activeWeek=0; const weekBtns=document.getElementById("weekButtons");
+dailyWeeks.forEach((w,i)=>{const b=document.createElement("button");b.className="weekbtn";b.textContent="W"+(i+1);b.onclick=()=>renderWeek(i);weekBtns.appendChild(b)});
+function keyFor(w,d){return "careerOS_w"+w+"_d"+d}
+function renderWeek(i){activeWeek=Math.max(0,Math.min(dailyWeeks.length-1,i));const w=dailyWeeks[activeWeek];
+document.getElementById("weekTitle").textContent=w.title;document.getElementById("weekGoal").textContent=w.goal;
+weekBtns.querySelectorAll("button").forEach((b,j)=>b.classList.toggle("active",j===activeWeek));
+document.getElementById("weekDeliverable").innerHTML=`<span class="tracklabel" style="--trackbg:${w.bg}">${w.track}</span><p>${w.deliver}</p>`;
+const savedDeliver=localStorage.getItem("careerOS_deliver_"+activeWeek)==="1";document.getElementById("deliverableDone").checked=savedDeliver;
+document.getElementById("deliverableDone").onchange=e=>localStorage.setItem("careerOS_deliver_"+activeWeek,e.target.checked?"1":"0");
+document.getElementById("dailyCards").innerHTML=w.days.map((d,j)=>{const checked=localStorage.getItem(keyFor(activeWeek,j))==="1";return `<div class="daily-card" style="--track:${w.color};--trackbg:${w.bg}"><div class="daylabel">Day ${j+1}</div><span class="tracklabel">${w.track}</span><h3>${d[0]}</h3><div class="part"><strong>LEARN · 60 min</strong>${d[1]}</div><div class="part"><strong>APPLY · 90 min</strong>${d[2]}</div><div class="part"><strong>DOCUMENT · 30 min</strong>${d[3]}</div><div class="resource"><strong>Source:</strong> <a href="${d[4]}" target="_blank" rel="noopener">Open learning source ↗</a></div><label class="done"><input type="checkbox" class="daycheck" data-day="${j}" ${checked?"checked":""}> Day mission completed</label></div>`}).join("");
+document.querySelectorAll(".daycheck").forEach(c=>c.onchange=()=>{localStorage.setItem(keyFor(activeWeek,Number(c.dataset.day)),c.checked?"1":"0");updateWeekProgress()});
+updateWeekProgress();}
+function updateWeekProgress(){const checks=[...document.querySelectorAll(".daycheck")];const n=checks.filter(c=>c.checked).length;document.getElementById("weekProgress").style.width=(n/6*100)+"%";document.getElementById("weekProgressText").textContent=n+"/6 days complete";}
+document.getElementById("prevWeek").onclick=()=>renderWeek(activeWeek-1);document.getElementById("nextWeek").onclick=()=>renderWeek(activeWeek+1);renderWeek(0);
+
+// Quran Journey tracker (independent from career roadmap)
+const quranDays=604-1; // memorization starts on Madani Mushaf page 2; one page/day
+let qActive=1;
+const qStorage=(kind,day)=>`qjourney_${kind}_${day}`;
+function qChecked(kind,day){return localStorage.getItem(qStorage(kind,day))==='1'}
+function qSet(kind,day,val){localStorage.setItem(qStorage(kind,day),val?'1':'0')}
+function qPage(day){return day+1} // Day 1 => page 2
+function qReadQuarter(day){return ((day-1)%240)+1} // one quarter hizb per day; restart after 240 quarters
+function qQuarterPage(q){return Math.max(1,Math.min(604,Math.floor((q-1)*604/240)+1))}
+function qPageLink(page){return `https://quran.com/page/${page}`}
+function qListenLink(page){return `https://quran.com/page/${page}`} // Quran.com page includes recitation player
+function qDayRender(day){qActive=Math.max(1,Math.min(quranDays,day));const pg=qPage(qActive),read=qReadQuarter(qActive),rpg=qQuarterPage(read);document.getElementById('qDayTitle').textContent=`اليوم ${qActive} · صفحة الحفظ ${pg}`;
+let tasks=[{kind:'memorize',cls:'',title:'حفظ جديد · صفحة '+pg,desc:'اسمعي الصفحة ثم احفظيها بالتقسيم والربط، وفي النهاية سمّعيها غيبًا.',links:[["فتح الصفحة للحفظ",qPageLink(pg)],["الاستماع للصفحة",qListenLink(pg)]],checks:[["تم الحفظ غيبًا",'memorize']]},
+{kind:'review',cls:'review',title:'مراجعة قريبة',desc:`راجعي صفحة ${pg-1} (صفحة أمس)${qActive>7?` + صفحة ${pg-7} (قبل أسبوع)`:''}.`,links:[["صفحة أمس",qPageLink(Math.max(2,pg-1))],...(qActive>7?[["مراجعة قبل أسبوع",qPageLink(pg-7)]]:[])],checks:[["أنجزت المراجعة",'review']]},
+{kind:'read',cls:'read',title:'ورد القراءة · ربع حزب رقم '+read,desc:'اقرئي ربع حزب يوميًا. رابط القراءة يفتح صفحة تقريبية لبداية الربع؛ استخدمي المصحف لتحديد نهاية الربع بدقة.',links:[["فتح الورد للقراءة",qPageLink(rpg)],["الاستماع",qListenLink(rpg)]],checks:[["أنجزت ورد القراءة",'read']]},
+{kind:'review',cls:'review',title:'تثبيت وتسميع',desc:'سمّعي الصفحة الجديدة مرة أخرى، وحددي الأخطاء أو المتشابهات واكتبيها في الملاحظات.',links:[],checks:[["تم التسميع والتثبيت",'fix']]}];
+document.getElementById('qDay').innerHTML=tasks.map(t=>`<div class="qtask ${t.cls}"><h4>${t.title}</h4><p>${t.desc}</p>${t.links.map(l=>`<a href="${l[1]}" target="_blank" rel="noopener">${l[0]} ↗</a>`).join('')}<div>${t.checks.map(c=>`<label><input type="checkbox" data-qkind="${c[1]}" data-qday="${qActive}" ${qChecked(c[1],qActive)?'checked':''}> ${c[0]}</label>`).join('')}</div></div>`).join('');
+document.querySelectorAll('[data-qkind]').forEach(cb=>cb.onchange=()=>{qSet(cb.dataset.qkind,Number(cb.dataset.qday),cb.checked);qUpdate()});qUpdate();}
+function qUpdate(){let mem=0,read=0,rev=0;for(let d=1;d<=quranDays;d++){if(qChecked('memorize',d))mem++;if(qChecked('read',d))read++;if(qChecked('review',d)&&qChecked('fix',d))rev++;}document.getElementById('qMemCount').textContent=mem;document.getElementById('qReadCount').textContent=read;document.getElementById('qReviewCount').textContent=rev;let done=0;for(let d=1;d<=quranDays;d++)if(qChecked('memorize',d)&&qChecked('read',d)&&qChecked('review',d)&&qChecked('fix',d))done++;document.getElementById('qProgressBar').style.width=(done/quranDays*100)+'%';document.getElementById('qProgressText').textContent=`${done} يوم مكتمل من ${quranDays} · ${(done/quranDays*100).toFixed(1)}%`;qRenderDays();qRenderCertificates();}
+function qRenderDays(){let el=document.getElementById('qDays');el.innerHTML='';let start=Math.max(1,qActive-7),end=Math.min(quranDays,qActive+14);for(let d=start;d<=end;d++){let b=document.createElement('button');b.className='qdaybtn'+(d===qActive?' active':'')+(qChecked('memorize',d)&&qChecked('read',d)&&qChecked('review',d)&&qChecked('fix',d)?' done':'');b.textContent=d;b.onclick=()=>qDayRender(d);el.appendChild(b)}}
+const qJuzStarts=[1,22,42,62,82,102,122,142,162,182,202,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582];
+function qRenderCertificates(){let el=document.getElementById('qCertificates');el.innerHTML=qJuzStarts.map((start,i)=>{let end=(qJuzStarts[i+1]||605)-1;let memorizedEnd=Math.max(0,end-1);let completed=end<=qMemPage();return `<div class="qcert ${completed?'':'locked'}"><div style="font-size:26px">${completed?'🏅':'🔒'}</div><h3>شهادة تقدير وإتمام</h3><p>إتمام حفظ الجزء ${i+1} من القرآن الكريم</p><div class="owner">صاحبة رحلة الحفظ</div><p>باعتبارها صاحبة رحلة الحفظ والجهة المانحة لشهادة التقدير الذاتية</p><small>الجزء ${i+1} · صفحات المصحف ${start}–${end}</small>${completed?`<button class="qbtn" onclick="qPrintCert(${i+1},${start},${end})">طباعة الشهادة</button>`:`<p>تُفتح عند اكتمال الحفظ حتى صفحة ${end}</p>`}</div>`}).join('');}
+function qMemPage(){let page=1;for(let d=1;d<=quranDays;d++){if(qChecked('memorize',d))page++;else break;}return page;}
+function qPrintCert(juz,start,end){let w=window.open('','_blank');w.document.write(`<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>شهادة إتمام الجزء ${juz}</title><style>body{font-family:Arial,sans-serif;background:#fff;padding:30px}.cert{border:12px double #b9a5e5;padding:55px;text-align:center;min-height:70vh;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(140deg,#fff,#f5f0ff)}h1{color:#6f5bb7;font-size:38px}h2{color:#8c78c6;font-size:28px}.name{font-size:32px;font-weight:bold;margin:25px;color:#4f416e}.footer{margin-top:35px;color:#6e6193}button{display:none}@media print{body{padding:0}.cert{min-height:95vh}}</style></head><body><div class="cert"><div style="font-size:48px">🌙 ✦ 🏅</div><h1>شهادة تقدير وإتمام</h1><h2>إتمام حفظ الجزء ${juz} من القرآن الكريم</h2><p>تُمنح هذه الشهادة بكل تقدير واعتزاز إلى</p><div class="name">صاحبة رحلة الحفظ</div><p>تقديرًا لجهدها ومثابرتها في حفظ كتاب الله، وإتمامها حفظ الجزء ${juz}، سائلةً الله أن يجعل القرآن نورًا لقلبها ورفعةً لها.</p><div class="footer">الجهة المانحة: صاحبة رحلة الحفظ · شهادة تقدير ذاتية للاحتفاء بالإنجاز<br>مصحف المدينة · الصفحات ${start}–${end}</div></div><script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close();}
+const qNotes=document.getElementById('qNotes');qNotes.value=localStorage.getItem('qjourney_notes')||'';document.getElementById('qSaveNotes').onclick=()=>{localStorage.setItem('qjourney_notes',qNotes.value);document.getElementById('qNoteSaved').textContent='تم حفظ الملاحظات ✓'};
+document.getElementById('qPrev').onclick=()=>qDayRender(qActive-1);document.getElementById('qNext').onclick=()=>qDayRender(qActive+1);qDayRender(1);
+</script>
+</body></html>
