@@ -1,0 +1,15 @@
+{
+  "name": "AI Career Path OS — Dalia's Learning Dashboard",
+  "short_name": "Career OS",
+  "description": "Career roadmap, AI educator credentials, daily learning tracker, portfolio and Quran journey.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f8f7fc",
+  "theme_color": "#7662c6",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

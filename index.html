@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#7662c6">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>AI Career Path OS</title>
 <style>
 :root{--bg:#f7f7fb;--ink:#29253b;--muted:#74718a;--white:#fff;--lav:#e9e2ff;--purple:#7963c8;--blue:#e3efff;--green:#e3f4e9;--peach:#fff0df;--pink:#ffe5ee;--teal:#dff3f1;--line:#e8e5ef;--shadow:0 8px 28px #3e2e6810;--radius:20px}
@@ -60,6 +63,8 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 .daily-card a{font-weight:650;text-decoration:none}
 
 .qstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}.qstat,.qpanel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}.qstat b{display:block;font-size:25px;color:#6d5ab8}.qstat span{font-size:13px;color:var(--muted)}.qpanel{margin:12px 0}.qhead{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.qcontrols{display:flex;gap:6px}.qbtn{border:0;border-radius:10px;padding:9px 13px;background:#e9e2ff;color:#62518f;font-weight:700;cursor:pointer}.qday{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.qtask{padding:14px;border-radius:14px;background:#f9f7ff;border-left:5px solid #9a86d7}.qtask.read{background:#fff5e9;border-left-color:#d9a56a}.qtask.review{background:#eaf7ee;border-left-color:#76ad88}.qtask h4{margin:0 0 8px}.qtask p{margin:5px 0}.qtask a{display:inline-block;margin:5px 5px 0 0;color:#62518f;font-weight:700}.qtask label{display:block;margin-top:10px;padding:7px;background:#fff;border-radius:8px}.qdays{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0}.qdaybtn{padding:6px 9px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer}.qdaybtn.active{background:#7662c6;color:#fff}.qdaybtn.done{border-color:#6ca783;background:#e7f5eb}.qprogress{height:10px;background:#eee;border-radius:20px;overflow:hidden;margin-top:10px}.qprogress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#9b8bd8,#82bca0)}#qNotes{width:100%;min-height:100px;border:1px solid #ddd;border-radius:12px;padding:10px;font:inherit}.qcert{border:2px solid #c6b7eb;background:linear-gradient(135deg,#fff,#f4efff);border-radius:18px;padding:18px;text-align:center}.qcert h3{font-family:serif;color:#7662c6;font-size:23px}.qcert .owner{font-size:21px;font-weight:800;color:#504276}.qcert button{margin-top:10px}.qcert.locked{opacity:.65;filter:grayscale(.5)}@media(max-width:650px){.qday{grid-template-columns:1fr}.qstats{grid-template-columns:1fr 1fr 1fr}.qstat{padding:10px}}
+
+.pwa-banner{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:linear-gradient(120deg,#e9e2ff,#e7f5ee);padding:14px 16px;border-radius:16px;margin:12px 0}.pwa-banner button{border:0;border-radius:12px;padding:10px 14px;background:#7662c6;color:#fff;font-weight:800;cursor:pointer}.credential{border:1px solid var(--line);background:#fff;border-radius:17px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}.credential.priority{border:2px solid #8b79cc;background:linear-gradient(135deg,#fff,#f7f3ff)}.credential .meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.credential label{display:block;padding:9px;background:#f8f7fc;border-radius:9px;margin-top:8px}.credential a{font-weight:750}.credential .priority-tag{display:inline-block;padding:4px 8px;background:#7662c6;color:#fff;border-radius:8px;font-size:12px;font-weight:800}.cred-progress{height:9px;background:#eee;border-radius:20px;overflow:hidden;margin:10px 0}.cred-progress span{display:block;height:100%;background:linear-gradient(90deg,#7662c6,#83bca0);width:0}
 </style>
 </head>
 <body>
@@ -70,13 +75,14 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 <div class="topbar" id="nav">
 <button class="navbtn active" data-view="home">🏠 Home</button>
 <button class="navbtn" data-view="roles">💼 Job Path</button>
-<button class="navbtn" data-view="roadmap">🗓 Roadmap</button><button class="navbtn" data-view="daily">📆 Daily Tracker</button><button class="navbtn" data-view="quran">🌙 Quran Journey</button>
+<button class="navbtn" data-view="roadmap">🗓 Roadmap</button><button class="navbtn" data-view="credentials">🎓 Credentials</button><button class="navbtn" data-view="daily">📆 Daily Tracker</button><button class="navbtn" data-view="quran">🌙 Quran Journey</button>
 <button class="navbtn" data-view="skills">🧩 Skills & Gaps</button>
 <button class="navbtn" data-view="resources">🔗 Learning Sources</button>
 <button class="navbtn" data-view="portfolio">🏆 Portfolio</button>
 </div>
 </header>
 <div class="wrap">
+<div class="pwa-banner"><div><b>📱 Turn this dashboard into an app</b><br><small>Install it on your phone or desktop; offline shell support is being prepared.</small></div><button id="installApp" hidden>Install App</button></div>
 <section class="view active" id="home">
 <div class="hero-grid">
 <div class="panel">
@@ -140,6 +146,20 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 <div class="phase"><small>Every week</small><h3>Career Actions</h3><ul><li>1 public learning post or project update</li><li>2 meaningful community interactions</li><li>Review suitable roles and eligibility</li><li>English practice tied to interview/training</li></ul></div>
 </div>
 <h3 style="margin-top:24px">Weekly mission checklist</h3><div class="panel checklist" id="weekly"></div>
+</section>
+
+<section class="view" id="credentials">
+<h2>🎓 Priority Credentials & Badges</h2>
+<p class="subtitle">هدفنا مش تجميع شهادات؛ الأولوية للبرامج المجانية الرسمية التي تضيف دليلًا واضحًا على AI Education وAI Fluency. الترتيب قابل للتعديل حسب وقت التسجيل والتقدم.</p>
+<div class="panel"><h3>Near-term priority sprint</h3><p>ابدئي بالبرامج القصيرة ذات الـbadges الرسمية، وبعدها البرامج الأطول التي تعطي إطار كفاءات ومشروعًا عمليًا.</p><div class="cred-progress"><span id="credentialProgress"></span></div><small id="credentialProgressText">0 of 7 priorities completed</small></div>
+<div class="credential priority" data-credential="openai"><span class="priority-tag">PRIORITY 1 · BADGE</span><h3>OpenAI Academy — AI for Educators</h3><p><b>45 minutes · Free · Assessment badge</b></p><p>Practice lesson plans, activities, assessments, communications, and reviewing AI outputs against learning goals.</p><div class="meta"><span>AI in teaching</span><span>Prompting</span><span>Assessment review</span></div><a href="https://academy.openai.com/pages/courses" target="_blank" rel="noopener">Open official Academy →</a><label><input type="checkbox" class="credential-check" data-key="openai-start"> Started</label><label><input type="checkbox" class="credential-check" data-key="openai-done"> Completed + badge saved</label></div>
+<div class="credential priority" data-credential="anthropic"><span class="priority-tag">PRIORITY 2 · BADGE</span><h3>Anthropic Academy — AI Fluency for Educators</h3><p><b>1.5 hours · Free · Completion badge</b></p><p>Apply the 4D AI Fluency Framework to course design, learning objectives, slides, study guides, exercises, and assessments.</p><div class="meta"><span>Delegation</span><span>Description</span><span>Discernment</span><span>Diligence</span></div><a href="https://academy.claude.com/courses/ai-fluency-for-educators" target="_blank" rel="noopener">Open official course →</a><label><input type="checkbox" class="credential-check" data-key="anthropic-start"> Started</label><label><input type="checkbox" class="credential-check" data-key="anthropic-done"> Completed + badge saved</label></div>
+<div class="credential priority" data-credential="anthropic-foundations"><span class="priority-tag">PRIORITY 3 · FOUNDATION</span><h3>Anthropic — AI Fluency: Framework & Foundations</h3><p><b>Free · Recommended prerequisite</b></p><p>Build the general 4D framework before educator-focused application.</p><a href="https://academy.claude.com/" target="_blank" rel="noopener">Anthropic Academy →</a><label><input type="checkbox" class="credential-check" data-key="anthropic-foundations-done"> Completed</label></div>
+<div class="credential priority" data-credential="google"><span class="priority-tag">PRIORITY 4 · BADGES</span><h3>Google AI Educator Series</h3><p><b>Free · Bite-sized learning · Badges</b></p><p>Google AI/Gemini educator skills and practical classroom application. This is already in the roadmap; keep it as a priority credential path.</p><a href="https://edu.google.com/learning-center/google-ai-educator-series/" target="_blank" rel="noopener">Open official series →</a><label><input type="checkbox" class="credential-check" data-key="google-start"> Started</label><label><input type="checkbox" class="credential-check" data-key="google-done"> Completed badges saved</label></div>
+<div class="credential" data-credential="microsoft"><h3>Microsoft Learn — AI Literacy for Educators</h3><p><b>Free · 3h 21m · 5 modules</b></p><p>AI literacy, responsible AI, human oversight, privacy, and education applications.</p><a href="https://learn.microsoft.com/en-us/training/paths/introduction-ai-literacy/" target="_blank" rel="noopener">Open official learning path →</a><label><input type="checkbox" class="credential-check" data-key="microsoft-done"> Completed</label></div>
+<div class="credential" data-credential="europe"><h3>European AI Competent Teacher</h3><p><b>Free · Self-paced · 15–20 hours</b></p><p>AI competence framework, pedagogy, ethics, and teacher self-assessment. Longer credential; schedule after priority badges.</p><a href="https://academy.europa.eu/courses/becoming-an-artificial-intelligent-competent-teacher" target="_blank" rel="noopener">Open official course →</a><label><input type="checkbox" class="credential-check" data-key="europe-done"> Completed</label></div>
+<div class="credential" data-credential="unesco"><h3>UNESCO UIL — Digital Empowerment for Adult Educators in the Age of AI</h3><p><b>Free · Self-paced</b></p><p>AI and digital literacy, ethics, media literacy, inclusive online learning, and adult education.</p><a href="https://learninghub.uil.unesco.org/" target="_blank" rel="noopener">Open UNESCO Learning Hub →</a><label><input type="checkbox" class="credential-check" data-key="unesco-done"> Completed</label></div>
+<div class="panel"><h3>Evidence locker — save the actual credential</h3><p>For each completed course, keep: certificate/badge image, public verification link, issue date, course URL, skills learned, and one portfolio artifact applying the skill. We will add these to the website certificate gallery in the next web-app phase.</p></div>
 </section>
 
 
@@ -239,7 +259,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 <div class="panel" style="grid-column:1/-1;background:linear-gradient(120deg,#e9e2ff,#e0f3f1)"><h3>Capstone · AI Learning & Enablement System</h3><p>Role-based learning program + tool matrix + prompt library + workflow + AI knowledge assistant prototype (optional advanced) + workshop + assessment + evaluation + 3–5 minute demo video.</p><b>Target evidence:</b> a case study that shows you can design, teach, build, evaluate and responsibly lead AI adoption—not only produce content.</div>
 </div>
 </section>
-<div class="footer">This is a first working roadmap, not a guarantee of job eligibility. Role requirements and remote-country restrictions vary by employer. Verify live postings before applying. Roadmap and progress are editable in this local browser file; use the checklist to mark completed evidence.</div>
+<div class="footer">This is a first working roadmap, not a guarantee of job eligibility. Role requirements and remote-country restrictions vary by employer. Verify live postings before applying. Progress is stored on this device/browser. The current version is an installable web-app shell; cross-device cloud sync will be a later feature.</div>
 </div>
 <script>
 const nav=document.querySelectorAll('.navbtn'),views=document.querySelectorAll('.view');
@@ -424,5 +444,14 @@ function qMemPage(){let page=1;for(let d=1;d<=quranDays;d++){if(qChecked('memori
 function qPrintCert(juz,start,end){let w=window.open('','_blank');w.document.write(`<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>شهادة إتمام الجزء ${juz}</title><style>body{font-family:Arial,sans-serif;background:#fff;padding:30px}.cert{border:12px double #b9a5e5;padding:55px;text-align:center;min-height:70vh;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(140deg,#fff,#f5f0ff)}h1{color:#6f5bb7;font-size:38px}h2{color:#8c78c6;font-size:28px}.name{font-size:32px;font-weight:bold;margin:25px;color:#4f416e}.footer{margin-top:35px;color:#6e6193}button{display:none}@media print{body{padding:0}.cert{min-height:95vh}}</style></head><body><div class="cert"><div style="font-size:48px">🌙 ✦ 🏅</div><h1>شهادة تقدير وإتمام</h1><h2>إتمام حفظ الجزء ${juz} من القرآن الكريم</h2><p>تُمنح هذه الشهادة بكل تقدير واعتزاز إلى</p><div class="name">صاحبة رحلة الحفظ</div><p>تقديرًا لجهدها ومثابرتها في حفظ كتاب الله، وإتمامها حفظ الجزء ${juz}، سائلةً الله أن يجعل القرآن نورًا لقلبها ورفعةً لها.</p><div class="footer">الجهة المانحة: صاحبة رحلة الحفظ · شهادة تقدير ذاتية للاحتفاء بالإنجاز<br>مصحف المدينة · الصفحات ${start}–${end}</div></div><script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close();}
 const qNotes=document.getElementById('qNotes');qNotes.value=localStorage.getItem('qjourney_notes')||'';document.getElementById('qSaveNotes').onclick=()=>{localStorage.setItem('qjourney_notes',qNotes.value);document.getElementById('qNoteSaved').textContent='تم حفظ الملاحظات ✓'};
 document.getElementById('qPrev').onclick=()=>qDayRender(qActive-1);document.getElementById('qNext').onclick=()=>qDayRender(qActive+1);qDayRender(1);
+
+// Credential checklist persistence
+const credentialChecks=[...document.querySelectorAll('.credential-check')];
+credentialChecks.forEach(cb=>{const k='cred_'+cb.dataset.key;cb.checked=localStorage.getItem(k)==='1';cb.addEventListener('change',()=>{localStorage.setItem(k,cb.checked?'1':'0');updateCredentialProgress();});});
+function updateCredentialProgress(){const keys=['openai-done','anthropic-done','anthropic-foundations-done','google-done','microsoft-done','europe-done','unesco-done'];const count=keys.filter(k=>localStorage.getItem('cred_'+k)==='1').length;const bar=document.getElementById('credentialProgress');if(bar)bar.style.width=(count/keys.length*100)+'%';const txt=document.getElementById('credentialProgressText');if(txt)txt.textContent=`${count} of ${keys.length} priority credentials completed`; }
+updateCredentialProgress();
+// PWA install prompt
+let deferredInstallPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;const btn=document.getElementById('installApp');if(btn)btn.hidden=false;});const installBtn=document.getElementById('installApp');if(installBtn)installBtn.addEventListener('click',async()=>{if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;installBtn.hidden=true;});
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(console.warn);
 </script>
 </body></html>
