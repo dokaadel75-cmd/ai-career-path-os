@@ -16,7 +16,7 @@ h1{font-size:clamp(30px,4vw,52px);margin:9px 0 6px;letter-spacing:-.04em}
 .subtitle{color:var(--muted);max-width:800px;line-height:1.55}
 .wrap{max-width:1450px;margin:auto;padding:0 clamp(18px,4vw,54px) 50px}
 .topbar{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
-.navbtn{background:white;color:#5e567a;padding:11px 15px;border-radius:999px;border:1px solid var(--line);font-weight:650}
+.navbtn{position:relative;z-index:30;pointer-events:auto;touch-action:manipulation;background:white;color:#5e567a;padding:11px 15px;border-radius:999px;border:1px solid var(--line);font-weight:650}
 .navbtn.active{background:#7662c6;color:white;border-color:#7662c6}
 .view{display:none}.view.active{display:block}
 .hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-bottom:20px}
@@ -81,6 +81,17 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 <button class="navbtn" data-view="resources">🔗 Learning Sources</button>
 <button class="navbtn" data-view="portfolio">🏆 Portfolio</button>
 </div>
+<script>
+(function(){
+ const nav=document.querySelectorAll('.navbtn'),views=document.querySelectorAll('.view');
+ function switchTab(id){
+  views.forEach(v=>v.classList.toggle('active',v.id===id));
+  nav.forEach(b=>b.classList.toggle('active',b.dataset.view===id));
+  window.scrollTo(0,0);
+ }
+ nav.forEach(b=>{b.addEventListener('click',function(e){e.preventDefault();switchTab(this.dataset.view);});});
+})();
+</script>
 </header>
 <div class="wrap">
 <div class="pwa-banner"><div><b>📱 Turn this dashboard into an app</b><br><small>Install it on your phone or desktop; offline shell support is being prepared.</small></div><button id="installApp" hidden>Install App</button></div>
